@@ -1,3 +1,6 @@
+O código abaixo foi criado para paralelizar a multiplicação de uma matriz com um vetor, todas as linhas da matriz podem ser 
+multiplicadas de forma paralela, já que são concorrentes, isso aumenta a eficiência do programa.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
