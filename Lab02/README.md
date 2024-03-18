@@ -8,7 +8,7 @@ time ./nomeDOExe → roda o programa e passa o tempo de execução
 taskset -c 0,1,2(enumeraçãoDosProcessadores) ./nomeDoExe → seta um número especifico de processadores para ser utilizado
 
 ## 1. Qual o tempo de execução serial e paralelo para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico contendo todos os tempos de execução
-![Result](https://prod-files-secure.s3.us-west-2.amazonaws.com/ae478dc5-da13-4a90-b2fe-e60944889681/791f568a-26f0-4477-af66-bd90b7918d1f/Untitled.png)
+<img width="663" alt="Untitled" src="https://github.com/Marina-Martin/Paralela/assets/47898516/f6e797ba-9373-4884-9f39-a4e51e065a97">
 
 ### 1 Processador
 
