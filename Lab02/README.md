@@ -76,12 +76,19 @@ int M[4][4] = {
         {9, 10, 11, 12},
         {13, 14, 15, 16}
     };
+int R[4][4], iterador = 0;
 int V[4] = {1, 2, 3, 4};
 
 void *Mult(void* rank){
 		long my_rank = (long) rank;
 		
-		printf("Hello from thread %ld of %d", my_rank, thread_count);
+		for(int cont = iterador; cont < vet[my_rank]; cont++){
+		    for(int i2 = 0; i2 < 4; i2++){
+		        R[iterador][i2] = M[iterador][i2] * V[i2];
+		    }
+		    iterador = cont;
+		}
+		printf("Hello from thread %ld of %d\n", my_rank, thread_count);
 		
 		return NULL;
 }
@@ -92,25 +99,26 @@ void *Mult(void* rank){
 int main(int argc, char* argv[]){
 	long thread;
 	pthread_t* thread_handles;
-	int num = 4, i = 0;
+	int i = 0;
 	
 	//for pra dividir as linhas entre as threads disponíveis
 
 	thread_count = strtol(argv[1], NULL, 10);
 	thread_handles = malloc(thread_count * sizeof(pthread_t));
 	
-	//esse código supostamente vai divir as linhas da matriz entre as threads	
-	while(num >= 0){
-	    if(i > 3){
+	//esse código vai divir as linhas da matriz entre as threads	
+	for(int num = 0; num < 4;){
+	    if(i == thread_count){
 	        i = 0;
 	    }
-	    vet[num] += 1;
-	    num -= 1;
+	    vet[i] += 1;
+	    i += 1;
+	    num += 1;
 	}
 	
-	for(int i = 0; i < 4; i++){
-	    printf("%i", vet[i]);
-	}
+	for(int it = 0; it < 4; it++){
+	    printf("%i", vet[it]);
+	}printf("\n");
 	
 	for(thread = 0; thread < thread_count; thread++){
 		pthread_create(&thread_handles[thread], NULL, Mult, (void*) thread);
@@ -124,6 +132,34 @@ int main(int argc, char* argv[]){
 	
 	free(thread_handles);
 	
+	for(int i = 0; i < 4; i++){
+	    for(int i2 = 0; i2 < 4; i2++){
+	        printf("%i", M[i][i2]);
+	    }
+	}
+	
 	return 0;
 }
 ```
+
+Processador: Apple M1
+
+tempo de processamento total: 0,006 seg
+
+### 3 Processadores
+
+Processador: Apple M1
+
+tempo de processamento total: 0,005 seg
+
+### 4 Processadores
+
+Processador: Apple M1
+
+tempo de processamento total: 0,005 seg
+
+![Grafico](https://github.com/Marina-Martin/Paralela/assets/47898516/9c1bfa97-9fea-4026-8fb6-2fb23cc9387f)
+
+## 3. Como você acha que poderia melhorar o seu algoritmo para obter maior benefício com o paralelismo? Para provar seu ponto, refaça a solução com essa abordagem e construa um novo gráfico de speedup para 1, 2, 4, 6 e 8 processadores.
+
+Durante o desenvolvimento eu tive que mudar emu código e o fiz, dividindo as linhas da matriz com o número de threads disponíveis para o processo. O outro código não tinha mudanças para cada número de processadores.
