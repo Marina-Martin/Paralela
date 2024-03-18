@@ -1,5 +1,5 @@
 
-### Comandos
+## Comandos
 
 cat /proc/cpuinfo → mostra informações, incluindo o processador
 
@@ -10,13 +10,13 @@ taskset -c 0,1,2(enumeraçãoDosProcessadores) ./nomeDoExe → seta um número e
 ## 1. Qual o tempo de execução serial e paralelo para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico contendo todos os tempos de execução
 ![Result](https://prod-files-secure.s3.us-west-2.amazonaws.com/ae478dc5-da13-4a90-b2fe-e60944889681/791f568a-26f0-4477-af66-bd90b7918d1f/Untitled.png)
 
-# 1 Processador
+### 1 Processador
 
 processador AWS: Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz
 
 tempo de processamento real: 0.030 segundos
 
-# 2 Processadores
+### 2 Processadores
 
 fiz testes com taskset, mas ele não parece funcionar dentro do MacOs. 
 
