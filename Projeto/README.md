@@ -8,6 +8,20 @@ O objetivo deste projeto é calcular a soma da série de Taylor para a função 
 
 O código em C utiliza a biblioteca OpenMP para dividir o cálculo da série de Taylor entre várias threads, aproveitando o paralelismo para acelerar o processamento.
 
+Compilação e Execução
+Para compilar o código, certifique-se de ter um compilador C com suporte a OpenMP instalado em seu sistema. Em sistemas baseados em Debian/Ubuntu, você pode instalar o OpenMP usando o seguinte comando:
+
+sudo apt-get install libgomp1
+Para compilar o código, use o seguinte comando:
+
+gcc -fopenmp nome_do_arquivo.c -o nome_do_executavel
+Substitua "nome_do_arquivo.c" pelo nome do arquivo de código-fonte e "nome_do_executavel" pelo nome desejado para o arquivo executável.
+
+Para executar o programa, use o seguinte comando:
+
+./nome_do_executavel
+O programa calculará a soma da série de Taylor com o número de termos especificado e exibirá o resultado na tela.
+
 ## Funcionamento do Código
 
 O código segue os seguintes passos:
