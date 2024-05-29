@@ -10,12 +10,24 @@ double fatorial(int n) {
 }
 
 int main() {
-    int N = 100000; // Número de termos da série de Taylor
+    int N = 1000000; // Número de termos da série de Taylor
     double soma = 0.0;
 
-    #pragma omp parallel for reduction(+:soma)
-    for (int i = 0; i < N; i++) {
-        soma += 1.0 / fatorial(i);
+    #pragma omp parallel
+    {
+        int thread_id = omp_get_thread_num();
+        int num_threads = omp_get_num_threads();
+        double soma_local = 0.0;
+
+        #pragma omp for schedule(static)
+        for (int i = 0; i < N; i++) {
+            soma_local += 1.0 / fatorial(i);
+        }
+
+        #pragma omp critical
+        {
+            soma += soma_local;
+        }
     }
 
     printf("A soma da série de Taylor com %d termos é: %.10f\n", N, soma);
